@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="./css/core.min.css">
+		<link rel="stylesheet" href="./css/main.min.css">
+		<title>Home</title>
+		<script>
+			(function () {
+				function id(v) { return document.getElementById(v); }
+				function loadbar() {
+					var ovrl = id("loading"),
+						prog = id("progress"),
+						stat = id("progstat"),
+						img = document.images,
+						c = 0,
+						tot = img.length;
+					if (tot == 0) return doneLoading();
+			
+					function imgLoaded() {
+						c += 1;
+						var perc = ((100 / tot * c) << 0);
+						prog.style.width = perc;
+						stat.innerHTML = perc;
+						if (c === tot) return doneLoading();
+					}
+					function doneLoading() {
+						ovrl.style.opacity = 0;
+						setTimeout(function () {
+							ovrl.style.display = "none";
+						}, 1200);
+					}
+					for (var i = 0; i < tot; i++) {
+						var tImg = new Image();
+						tImg.onload = imgLoaded;
+						tImg.onerror = imgLoaded;
+						tImg.src = img[i].src;
+					}
+				}
+				document.addEventListener('DOMContentLoaded', loadbar, false);
+			
+					// Set the date we're counting down to
+				var countDownDate = new Date("Aug 24, 2019 23:59:59").getTime();
+			
+				// Update the count down every 1 second
+				var x = setInterval(function () {
+					// Get today's date and time
+					var now = new Date().getTime();
+			
+					// Find the distance between now and the count down date
+					var distance = countDownDate - now;
+			
+					// Time calculations for days, hours, minutes and seconds
+					var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					// var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			
+					// Display the result in the element with id="demo"
+					document.getElementById("days").innerHTML = days;
+					document.getElementById("hours").innerHTML = hours;
+					document.getElementById("minutes").innerHTML = minutes;
+			
+					// If the count down is finished, write some text 
+					if (distance < 0) {
+						clearInterval(x);
+						document.getElementById("demo").innerHTML = "EXPIRED";
+					}
+				}, 1000);
+			}());
+		</script>
+	</head>
+	<body class="home-page">
+		<div id="loading">
+			<div class="logo-loader"><img src="./img/loading.gif" alt=""></div>
+			<div class="progstat-wrapper">Loading: <span id="progstat">0</span>%</div>
+			<div id="progress"></div>
+		</div>
+		<header>
+			<div class="header-wrapper">
+				<ul>
+					<li><a href="#home-1">Trang chủ</a></li>
+					<li class="active"><a href="#home-2">Giới thiệu</a></li>
+					<li><a href="#home-3">Video</a></li>
+					<li><a href="#home-4">Game</a></li>
+				</ul>
+			</div>
+		</header>
+		<main>
+			<div class="home home-banner" id="home-1"><img src="./img/banner.jpg" alt="">
+				<div class="event-name">
+					<h1>Acer Day 2019</h1>
+					<time>24-08-2019</time>
+				</div>
+				<div class="time">
+					<div class="count"><span id="days">0 </span><span> Ngày</span></div>
+					<div class="count"><span id="hours">0 </span><span> Giờ</span></div>
+					<div class="count"><span id="minutes">0 </span><span> Phút</span></div>
+				</div>
+			</div>
+			<div class="home home-introduce" id="home-2">
+				<div class="row no-gutters mobile-content">
+					<div class="col-lg-4">
+						<div class="item">
+							<div class="img"><img src="./img/i_1.jpg" alt=""></div>
+							<div class="content">
+								<time>2017</time>
+								<h3>Be Cool, Every Day </h3>
+								<p>Lấy cảm hứng từ công nghệ tản nhiệt vượt trội, Acer Day 2017 mang lại những khoảng khắc thật "cool" dành cho Khách hàng.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="item">
+							<div class="img"><img src="./img/i_2.jpg" alt=""></div>
+							<div class="content">
+								<time>2018</time>
+								<h3>Play Music Toghether</h3>
+								<p>Sáng tạo -  giải trí không giới hạn là thông điệp và nguồn cảm hứng Acer Day 2018 mang đến. Thật nhiều bản nhạc đầy cảm xúc đã được tạo nên. </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="item">
+							<div class="img"><img src="./img/i_3.jpg" alt=""></div>
+							<div class="content">
+								<time>2019</time>
+								<h3>Levelup - Next level of yourself.</h3>
+								<p>Cổ vũ tinh thần không ngừng bước tiến, Acer Day 2019 sẽ mang lại điều bất ngờ gì? Cùng chờ đợi nhé!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row no-gutters desktop-content">
+					<div class="col-lg-4">
+						<div class="item">
+							<div class="content">
+								<time>2017</time>
+								<h3>Be Cool, Every Day </h3>
+								<p>Lấy cảm hứng từ công nghệ tản nhiệt vượt trội, Acer Day 2017 mang lại những khoảng khắc thật "cool" dành cho Khách hàng.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="item">
+							<div class="content">
+								<time>2018</time>
+								<h3>Play Music Toghether</h3>
+								<p>Sáng tạo -  giải trí không giới hạn là thông điệp và nguồn cảm hứng Acer Day 2018 mang đến. Thật nhiều bản nhạc đầy cảm xúc đã được tạo nên. </p>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="item">
+							<div class="content">
+								<time>2019</time>
+								<h3>Levelup - Next level of yourself.</h3>
+								<p>Cổ vũ tinh thần không ngừng bước tiến, Acer Day 2019 sẽ mang lại điều bất ngờ gì? Cùng chờ đợi nhé!</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="home home-video-gallery" id="home-3">
+				<div class="title video">
+					<h2>Video Gallery</h2>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-nav">
+						<div class="prev"><img src="./img/arrow_prev.png" alt=""></div>
+						<div class="next"><img src="./img/arrow_next.png" alt=""></div>
+					</div>
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<div class="img"><img class="ofc" src="./img/video_1.jpg" alt=""></div>
+							<div class="button-video"><a href="https://www.youtube.com/watch?v=L0NZW6pgSLc" data-fancybox><img src="./img/video_button.png" alt=""></a></div>
+						</div>
+						<div class="swiper-slide">
+							<div class="img"><img class="ofc" src="./img/video_1.jpg" alt=""></div>
+							<div class="button-video"><a href="https://www.youtube.com/watch?v=L0NZW6pgSLc" data-fancybox><img src="./img/video_button.png" alt=""></a></div>
+						</div>
+						<div class="swiper-slide">
+							<div class="img"><img class="ofc" src="./img/video_1.jpg" alt=""></div>
+							<div class="button-video"><a href="https://www.youtube.com/watch?v=L0NZW6pgSLc" data-fancybox><img src="./img/video_button.png" alt=""></a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="home home-game" id="home-4">
+				<div class="title game">
+					<h2>Vọc game vui cùng Acer Day</h2>
+				</div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="item">
+								<div class="img"><img src="./img/game_1.png" alt=""></div>
+								<div class="content">
+									<h3>Coming Soon</h3>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="item">
+								<div class="img"><img src="./img/game_2.png" alt=""></div>
+								<div class="content">
+									<h3>Coming Soon</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script src="./js/core.min.js"></script>
+		<script src="./js/main.min.js"></script>
+	</body>
+</html>
