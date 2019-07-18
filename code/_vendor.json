@@ -1,0 +1,21 @@
+{
+	"vendor": {
+		"font": [
+			"src/fonts/**"
+		],
+		"js": [
+			"bower_components/jquery/dist/jquery.min.js",
+			"bower_components/object-fit-images/dist/ofi.browser.js",
+			"bower_components/lazysizes/lazysizes.js",
+			"_vendor/ls.unveilhooks.min.js",
+			"bower_components/swiper/dist/js/swiper.js",
+			"bower_components/fancybox/dist/jquery.fancybox.js"
+		],
+		"css": [
+			"_vendor/font.css",
+			"_vendor/grid.css",
+			"bower_components/swiper/dist/css/swiper.css",
+			"bower_components/fancybox/dist/jquery.fancybox.css"
+		]
+	}
+}

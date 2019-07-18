@@ -1,0 +1,92 @@
+block var
+
+doctype html
+
+html(lang="en")
+
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(http-equiv="X-UA-Compatible", content="ie=edge")
+		link(rel="stylesheet", href="./css/core.min.css")
+		link(rel="stylesheet", href="./css/main.min.css")
+		title #{title}
+		script.
+			(function () {
+				function id(v) { return document.getElementById(v); }
+				function loadbar() {
+					var ovrl = id("loading"),
+						prog = id("progress"),
+						stat = id("progstat"),
+						img = document.images,
+						c = 0,
+						tot = img.length;
+					if (tot == 0) return doneLoading();
+
+					function imgLoaded() {
+						c += 1;
+						var perc = ((100 / tot * c) << 0);
+						prog.style.width = perc;
+						stat.innerHTML = perc;
+						if (c === tot) return doneLoading();
+					}
+					function doneLoading() {
+						ovrl.style.opacity = 0;
+						setTimeout(function () {
+							ovrl.style.display = "none";
+						}, 1200);
+					}
+					for (var i = 0; i < tot; i++) {
+						var tImg = new Image();
+						tImg.onload = imgLoaded;
+						tImg.onerror = imgLoaded;
+						tImg.src = img[i].src;
+					}
+				}
+				document.addEventListener('DOMContentLoaded', loadbar, false);
+
+					// Set the date we're counting down to
+				var countDownDate = new Date("Aug 24, 2019 23:59:59").getTime();
+
+				// Update the count down every 1 second
+				var x = setInterval(function () {
+					// Get today's date and time
+					var now = new Date().getTime();
+
+					// Find the distance between now and the count down date
+					var distance = countDownDate - now;
+
+					// Time calculations for days, hours, minutes and seconds
+					var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+					var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+					var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+					// var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+					// Display the result in the element with id="demo"
+					document.getElementById("days").innerHTML = days;
+					document.getElementById("hours").innerHTML = hours;
+					document.getElementById("minutes").innerHTML = minutes;
+
+					// If the count down is finished, write some text 
+					if (distance < 0) {
+						clearInterval(x);
+						document.getElementById("demo").innerHTML = "EXPIRED";
+					}
+				}, 1000);
+			}());
+	body(class=bodyClass)
+		#loading
+			.logo-loader
+				img(src="./img/loading.gif", alt="")
+			.progstat-wrapper Loading: 
+				span#progstat 0
+				| %
+			#progress
+		block header
+			include ../components/_global/header.pug
+		main
+			block main
+		block footer
+			include ../components/_global/footer.pug
+		script(src="./js/core.min.js")
+		script(src="./js/main.min.js")
