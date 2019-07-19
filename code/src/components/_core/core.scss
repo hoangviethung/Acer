@@ -4,7 +4,11 @@ body {
 	line-height: 1.5;
 	font-weight: 400;
 }
-
+main{
+	@media (min-width: 1025px) {
+		margin-top: -80px;
+	}
+}
 ul {
 	list-style-type: none;
 	padding-left: 0;
