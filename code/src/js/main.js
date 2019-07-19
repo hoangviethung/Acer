@@ -17,59 +17,21 @@ const videoGallery = () => {
 		loopedSlides: 5,
 		loop: true,
 		spaceBetween: 0,
+		observer: true,
+		observeParents: true,
 		speed: 1200,
+		loop: true,
 		navigation: {
 			prevEl: ".home-video-gallery .swiper-container .prev",
 			nextEl: ".home-video-gallery .swiper-container .next"
+		},
+		breakpoints: {
+			1025: {
+				slidesPerView: 1,
+			}
 		}
-		// on: {
-		// 	init: function () {
-		// 		$(".home-video-gallery .swiper-container .img").each(function () {
-		// 			$(this).height($(this).width() / 1.77)
-		// 		})
-		// 	},
-		// 	resize: function () {
-		// 		$(".home-video-gallery .swiper-container .img").each(function () {
-		// 			$(this).height($(this).width() / 1.77)
-		// 		})
-		// 	}
-		// }
 	})
 }
-
-
-const countDown = () => {
-	// Set the date we're counting down to
-	var countDownDate = new Date("Aug 24, 2019 23:59:59").getTime();
-
-	// Update the count down every 1 second
-	var x = setInterval(function () {
-
-		// Get today's date and time
-		var now = new Date().getTime();
-
-		// Find the distance between now and the count down date
-		var distance = countDownDate - now;
-
-		// Time calculations for days, hours, minutes and seconds
-		var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-		var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-		// var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-		// Display the result in the element with id="demo"
-		document.getElementById("days").innerHTML = days;
-		document.getElementById("hours").innerHTML = hours;
-		document.getElementById("minutes").innerHTML = minutes;
-
-		// If the count down is finished, write some text 
-		if (distance < 0) {
-			clearInterval(x);
-			document.getElementById("demo").innerHTML = "EXPIRED";
-		}
-	}, 1000);
-}
-
 
 const headerClickToScroll = () => {
 	$(".header-wrapper ul a").each(function () {
@@ -81,6 +43,7 @@ const headerClickToScroll = () => {
 			$("html,body").animate({
 				scrollTop: pos
 			}, 1200)
+			$("#header-menu").removeClass("show")
 		})
 	})
 }
@@ -97,25 +60,104 @@ const activeWhenScrollTo = () => {
 	})
 }
 
+const changeClassToSlider = (bp) => {
+	let classContainer = document.querySelectorAll("#home-2 .home-2-container");
+	let classWrapper = document.querySelectorAll("#home-2 .home-2-wrapper");
+	let classSlide = document.querySelectorAll("#home-2 .home-2-container .home-2-slide");
+	if (bp.matches) {
+		Array.prototype.forEach.call(classContainer, el => {
+			el.classList.remove("mobile-content");
+			el.classList.add("swiper-container");
+		})
+		Array.prototype.forEach.call(classWrapper, el => {
+			el.classList.remove("row");
+			el.classList.remove("no-gutters");
+			el.classList.add("swiper-wrapper");
+		})
+		Array.prototype.forEach.call(classSlide, el => {
+			el.classList.remove("col-lg-4");
+			el.classList.add("swiper-slide");
+		})
+
+		let home2SLider = new Swiper("#home-2 .home-2-container", {
+			slidesPerView: 1,
+			on: {
+				init: () => {
+					Array.prototype.forEach.call(classSlide, el => {
+						el.style.height = document.querySelector("#home-2 .home-2-container").offsetHeight + "px"
+					})
+				}
+			},
+			pagination: {
+				el: "#home-2 .home-2-container .home-2-dots",
+				clickable: true,
+				speed: 1200,
+			}
+		})
+	} else {
+		Array.prototype.forEach.call(classContainer, el => {
+			el.classList.add("mobile-content");
+			el.classList.remove("swiper-container");
+			el.removeAttribute("style");
+		})
+		Array.prototype.forEach.call(classWrapper, el => {
+			el.classList.add("row");
+			el.classList.add("no-gutters");
+			el.classList.remove("swiper-wrapper");
+			el.removeAttribute("style");
+		})
+		Array.prototype.forEach.call(classSlide, el => {
+			el.classList.add("col-lg-4");
+			el.classList.remove("swiper-slide");
+			el.removeAttribute("style");
+		})
+	}
+}
+
+const mobileMenuToggle = () => {
+	$("#mobile-toggle").on("click", function () {
+		$("#header-menu").toggleClass("show")
+	})
+}
+
+const checkBreakpoint = () => {
+	let bp = window.matchMedia("(max-width: 1024px)");
+	changeClassToSlider(bp);
+	bp.addListener(changeClassToSlider);
+}
+
+const setHeightMobile = () => {
+	let ClassArray = document.querySelectorAll(".home");
+	Array.prototype.forEach.call(ClassArray, (el, i) => {
+		if (i >>= 0) {
+			el.style.minHeight = window.innerHeight + "px"
+		}
+	})
+}
+
 $(document).ready(function () {
 	// Luôn luôn chậy polyfill cho thuôc tính object-fit: cover trên các phiên bản IE >= 9
-	objectFitImages("img.object-fit-cover");
+	objectFitImages("img.ofc");
 	// Luôn luôn addClass lazyload cho các hình ảnh có thuộc tính [data-src]
 	addClassLazyload();
 	// countDown();
 	headerClickToScroll();
 	activeWhenScrollTo();
 	videoGallery();
+	checkBreakpoint();
+	setHeightMobile();
+	mobileMenuToggle();
 })
 
-$(window).on("scroll", function(){
+
+$(window).on("scroll", function () {
 	activeWhenScrollTo();
 })
 
 
 $(document).ajaxComplete(function () {
 	// Luôn luôn chậy polyfill cho thuôc tính object-fit: cover trên các phiên bản IE >= 9
-	objectFitImages("img.object-fit-cover");
+	objectFitImages("img.ofc");
 	// Luôn luôn addClass lazyload cho các hình ảnh có thuộc tính [data-src]
 	addClassLazyload();
 })

@@ -18,6 +18,10 @@ ul {
 		font-weight: 700;
 		color: white;
 		font-size: 43px;
+
+		@media (max-width: 1024.98px) {
+			font-size: 24px;
+		}
 	}
 
 	&.video {
@@ -32,6 +36,11 @@ ul {
 		justify-content: center;
 		align-items: center;
 		margin-bottom: 50px;
+
+		@media (max-width: 1024.98px) {
+			width: 240px;
+			height: 70px;
+		}
 	}
 
 	&.game {
@@ -46,6 +55,17 @@ ul {
 		justify-content: center;
 		align-items: center;
 		margin-bottom: 50px;
+
+		@media (max-width: 1024.98px) {
+			background-image: url("../img/bg_title_video.png");
+			width: 240px;
+			height: 76px;
+			padding: 0 30px;
+			text-align: center;
+			h2{
+				font-size: 22px;
+			}
+		}
 	}
 }
 

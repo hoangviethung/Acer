@@ -74,13 +74,15 @@
 	</head>
 	<body class="home-page">
 		<div id="loading">
-			<div class="logo-loader"><img src="./img/loading.gif" alt=""></div>
+			<div class="logo-loader"><img src="./img/loading.svg" alt=""></div>
 			<div class="progstat-wrapper">Loading: <span id="progstat">0</span>%</div>
 			<div id="progress"></div>
 		</div>
 		<header>
 			<div class="header-wrapper">
-				<ul>
+				<div class="mobile-logo"><a class="acer" href="#"><img src="./img/acer_logo.png" alt=""></a><a class="intel" href="#"><img src="./img/intel_logo.png" alt=""></a></div>
+				<div id="mobile-toggle"><img class="open" src="./img/bar.png"></div>
+				<ul id="header-menu">
 					<li><a href="#home-1">Trang chủ</a></li>
 					<li class="active"><a href="#home-2">Giới thiệu</a></li>
 					<li><a href="#home-3">Video</a></li>
@@ -89,7 +91,11 @@
 			</div>
 		</header>
 		<main>
-			<div class="home home-banner" id="home-1"><img src="./img/banner.jpg" alt="">
+			<div class="home home-banner" id="home-1">
+				<picture>
+					<source media="(min-width: 1025px)" srcset="./img/banner.jpg">
+					<source media="(max-width: 1024px)" srcset="./img/m_banner.jpg"><img src="./img/banner.jpg" alt="">
+				</picture>
 				<div class="event-name">
 					<h1>Acer Day 2019</h1>
 					<time>24-08-2019</time>
@@ -101,40 +107,43 @@
 				</div>
 			</div>
 			<div class="home home-introduce" id="home-2">
-				<div class="row no-gutters mobile-content">
-					<div class="col-lg-4">
-						<div class="item">
-							<div class="img"><img src="./img/i_1.jpg" alt=""></div>
-							<div class="content">
-								<time>2017</time>
-								<h3>Be Cool, Every Day </h3>
-								<p>Lấy cảm hứng từ công nghệ tản nhiệt vượt trội, Acer Day 2017 mang lại những khoảng khắc thật "cool" dành cho Khách hàng.</p>
+				<div class="mobile-content home-2-container">
+					<div class="home-2-dots"></div>
+					<div class="row no-gutters home-2-wrapper">
+						<div class="col-lg-4 home-2-slide">
+							<div class="item">
+								<div class="img"><img src="./img/i_1.jpg" alt=""></div>
+								<div class="content">
+									<time>2017</time>
+									<h3>Be Cool, Every Day </h3>
+									<p>Lấy cảm hứng từ công nghệ tản nhiệt vượt trội, Acer Day 2017 mang lại những khoảng khắc thật "cool" dành cho Khách hàng.</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="item">
-							<div class="img"><img src="./img/i_2.jpg" alt=""></div>
-							<div class="content">
-								<time>2018</time>
-								<h3>Play Music Toghether</h3>
-								<p>Sáng tạo -  giải trí không giới hạn là thông điệp và nguồn cảm hứng Acer Day 2018 mang đến. Thật nhiều bản nhạc đầy cảm xúc đã được tạo nên. </p>
+						<div class="col-lg-4 home-2-slide">
+							<div class="item">
+								<div class="img"><img src="./img/i_2.jpg" alt=""></div>
+								<div class="content">
+									<time>2018</time>
+									<h3>Play Music Toghether</h3>
+									<p>Sáng tạo -  giải trí không giới hạn là thông điệp và nguồn cảm hứng Acer Day 2018 mang đến. Thật nhiều bản nhạc đầy cảm xúc đã được tạo nên. </p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="item">
-							<div class="img"><img src="./img/i_3.jpg" alt=""></div>
-							<div class="content">
-								<time>2019</time>
-								<h3>Levelup - Next level of yourself.</h3>
-								<p>Cổ vũ tinh thần không ngừng bước tiến, Acer Day 2019 sẽ mang lại điều bất ngờ gì? Cùng chờ đợi nhé!</p>
+						<div class="col-lg-4 home-2-slide">
+							<div class="item">
+								<div class="img"><img src="./img/i_3.jpg" alt=""></div>
+								<div class="content">
+									<time>2019</time>
+									<h3>Levelup - Next level of yourself.</h3>
+									<p>Cổ vũ tinh thần không ngừng bước tiến, Acer Day 2019 sẽ mang lại điều bất ngờ gì? Cùng chờ đợi nhé!</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row no-gutters desktop-content">
-					<div class="col-lg-4">
+					<div class="col-lg-4 home-2-slide">
 						<div class="item">
 							<div class="content">
 								<time>2017</time>
@@ -143,7 +152,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-4 home-2-slide">
 						<div class="item">
 							<div class="content">
 								<time>2018</time>
@@ -152,7 +161,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-4 home-2-slide">
 						<div class="item">
 							<div class="content">
 								<time>2019</time>
@@ -194,7 +203,7 @@
 				</div>
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-6">
 							<div class="item">
 								<div class="img"><img src="./img/game_1.png" alt=""></div>
 								<div class="content">
@@ -202,7 +211,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-6">
 							<div class="item">
 								<div class="img"><img src="./img/game_2.png" alt=""></div>
 								<div class="content">
