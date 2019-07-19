@@ -74,9 +74,10 @@ header {
 				flex-direction: column;
 				justify-content: center;
 				transform: translateY(-100%);
-				transition: all .5s cubic-bezier(.2,.5,.5,.8);
+				transition: all .5s cubic-bezier(.2, .5, .5, .8);
 				opacity: 0;
 				max-width: 100%;
+
 				li {
 					flex: 0 0 auto;
 					width: auto;
@@ -135,6 +136,24 @@ header {
 				top: 60px;
 				z-index: 4;
 				width: 25px;
+
+				.close {
+					display: none;
+				}
+
+				.open {
+					display: block;
+				}
+
+				&.close {
+					.close {
+						display: block;
+					}
+
+					.open {
+						display: none;
+					}
+				}
 			}
 		}
 	}

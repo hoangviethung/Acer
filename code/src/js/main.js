@@ -43,7 +43,12 @@ const headerClickToScroll = () => {
 			$("html,body").animate({
 				scrollTop: pos
 			}, 1200)
-			$("#header-menu").removeClass("show")
+			$("#header-menu").toggleClass("show")
+			if ($("#header-menu").hasClass("show")) {
+				$("#mobile-toggle").addClass("close")
+			} else {
+				$("#mobile-toggle").removeClass("close")
+			}
 		})
 	})
 }
@@ -117,6 +122,11 @@ const changeClassToSlider = (bp) => {
 const mobileMenuToggle = () => {
 	$("#mobile-toggle").on("click", function () {
 		$("#header-menu").toggleClass("show")
+		if ($("#header-menu").hasClass("show")) {
+			$(this).addClass("close")
+		} else {
+			$(this).removeClass("close")
+		}
 	})
 }
 
@@ -129,7 +139,7 @@ const checkBreakpoint = () => {
 const setHeightMobile = () => {
 	let ClassArray = document.querySelectorAll(".home");
 	Array.prototype.forEach.call(ClassArray, (el, i) => {
-		if (i >>= 0) {
+		if (i >> 1) {
 			el.style.minHeight = window.innerHeight + "px"
 		}
 	})
