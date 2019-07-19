@@ -444,6 +444,7 @@
 	}
 
 	.swiper-slide-active {
+		z-index: 2;
 		.button-video {
 			display: block;
 			transform: translate(-50%, -50%);
