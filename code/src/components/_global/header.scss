@@ -84,9 +84,10 @@ header {
 				color: white;
 				display: block;
 				padding: 0 15px;
+				transition: all .3s cubic-bezier(.2,.5,.5,.8);
 			}
 
-			&.active {
+			&.active, &:hover {
 				a {
 					color: #00ff78;
 				}
