@@ -5,7 +5,9 @@ header {
 	// left: 0;
 	// z-index: 10;
 	z-index: 2;
-
+	@media (min-width: 1025px) {
+		position: relative;
+	}
 	.mobile-logo {
 		display: none;
 
