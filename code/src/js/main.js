@@ -37,9 +37,8 @@ const videoGallery = () => {
 const headerClickToScroll = () => {
 	$(".header-wrapper ul a").each(function () {
 		$(this).on("click", function (e) {
-			e.preventDefault();
 			activeWhenScrollTo();
-			let target = $(this).attr("href")
+			let target = $(this).attr("data-href")
 			let pos = $(target).offset().top;
 			$("html,body").animate({
 				scrollTop: pos
