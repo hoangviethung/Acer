@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i&amp;display=swap&amp;subset=vietnamese">
+		<link rel="stylesheet" href="./css/core.min.css">
+		<link rel="stylesheet" href="./css/main.min.css">
+		<title></title>
+		<script>
+			(function () {
+				function id(v) { return document.getElementById(v); }
+				function loadbar() {
+					var ovrl = id("loading"),
+						prog = id("progress"),
+						stat = id("progstat"),
+						img = document.images,
+						c = 0,
+						tot = img.length;
+					if (tot == 0) return doneLoading();
+			
+					function imgLoaded() {
+						c += 1;
+						var perc = ((100 / tot * c) << 0);
+						prog.style.width = perc;
+						stat.innerHTML = perc;
+						if (c === tot) return doneLoading();
+					}
+					function doneLoading() {
+						ovrl.style.opacity = 0;
+						setTimeout(function () {
+							ovrl.style.display = "none";
+							document.getElementById("loading").parentNode.removeChild(document.getElementById("loading"))
+						}, 1000);
+					}
+					for (var i = 0; i < tot; i++) {
+						var tImg = new Image();
+						tImg.onload = imgLoaded;
+						tImg.onerror = imgLoaded;
+						tImg.src = img[i].src;
+					}
+				}
+				document.addEventListener('DOMContentLoaded', loadbar, false);
+			}());
+		</script>
+	</head>
+	<body class="best-friend-page">
+		<div id="loading">
+			<div class="logo-loader"><img src="./img/loading.svg" alt=""></div>
+			<div class="progstat-wrapper">Loading: <span id="progstat">0</span>%</div>
+			<div id="progress"></div>
+		</div>
+		<main>
+			<div class="best-friend-wrapper" id="best-friend-wrapper">
+				<div class="container">
+					<div class="title popup">
+						<h2>Acer is your best friend</h2>
+					</div>
+					<div class="row" style="justify-content: center">
+						<div class="best-friend-wrapper-bg">
+							<div class="img" style="position: relative"><img src="./img/bestfriend.png" alt=""></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script src="./js/core.min.js"></script>
+		<script src="./js/main.min.js"></script>
+	</body>
+</html>

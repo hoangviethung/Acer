@@ -4,11 +4,21 @@ body {
 	line-height: 1.5;
 	font-weight: 400;
 }
-main{
+
+main {
 	@media (min-width: 1025px) {
 		margin-top: -80px;
 	}
 }
+
+.best-friend-page {
+	main {
+		@media (min-width: 1025px) {
+			margin-top: 0;
+		}
+	}
+}
+
 ul {
 	list-style-type: none;
 	padding-left: 0;
@@ -66,8 +76,31 @@ ul {
 			height: 76px;
 			padding: 0 30px;
 			text-align: center;
-			h2{
+
+			h2 {
 				font-size: 22px;
+			}
+		}
+	}
+
+	&.popup {
+		width: 875px;
+		height: 95px;
+		margin: 0 auto;
+		background-image: url("../img/bg_title_popup_mobile.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 20px;
+
+		@media (max-width: 1024.98px) {
+			width: 345px;
+			height: 40px;
+			h2{
+				text-shadow: 2px -4px 0 #115a6b, -1px 1px 0 #b2ff00;
 			}
 		}
 	}
@@ -116,10 +149,6 @@ ul {
 .logo-loader {
 	width: 100px;
 	height: 100px;
-	// background: url('../img/loading.svg');
-	// background-position: center;
-	// background-repeat: no-repeat;
-	// background-size: 100%;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -127,10 +156,12 @@ ul {
 	transform: translate(-50%, -50%);
 }
 
-.home{
+.home {
 	position: relative;
-	.intel-logo-bottom{
+
+	.intel-logo-bottom {
 		display: none;
+
 		@media (max-width: 1024.98px) {
 			display: block;
 			position: absolute;
@@ -139,9 +170,11 @@ ul {
 			z-index: 2;
 			width: 500px;
 		}
+
 		@media (max-width: 767.98px) {
 			width: 400px;
 		}
+
 		@media (max-width: 575.98px) {
 			width: 300px;
 		}

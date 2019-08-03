@@ -1,7 +1,7 @@
 @font-face {
 	font-family: "Acer Foco";
 	src: url("../fonts/AcerFocoRegular.otf");
-	src: url("../fonts/AcerFocoRegular.otf?#iefix&"), url("../fonts/AcerFocoRegular.ttf") format("truetype");
+	src: url("../fonts/AcerFocoRegular.otf?#iefix"), url("../fonts/AcerFocoRegular.ttf") format("truetype");
 	font-weight: 400;
 	font-style: normal;
 }
@@ -9,7 +9,7 @@
 @font-face {
 	font-family: "Acer Foco";
 	src: url("../fonts/AcerFocoLight.otf");
-	src: url("../fonts/AcerFocoLight.otf?#iefix&"), url("../fonts/AcerFocoLight.ttf") format("truetype");
+	src: url("../fonts/AcerFocoLight.otf?#iefix"), url("../fonts/AcerFocoLight.ttf") format("truetype");
 	font-weight: 300;
 	font-style: normal;
 }
@@ -17,7 +17,7 @@
 @font-face {
 	font-family: "Acer Foco";
 	src: url("../fonts/AcerFocoBold.otf");
-	src: url("../fonts/AcerFocoBold.otf?#iefix&"), url("../fonts/AcerFocoBold.ttf") format("truetype");
+	src: url("../fonts/AcerFocoBold.otf?#iefix"), url("../fonts/AcerFocoBold.ttf") format("truetype");
 	font-weight: 800;
 	font-style: normal;
 }
@@ -25,7 +25,7 @@
 @font-face {
 	font-family: "Acer Foco";
 	src: url("../fonts/AcerFocoBlack.otf");
-	src: url("../fonts/AcerFocoBlack.otf?#iefix&"), url("../fonts/AcerFocoBlack.ttf") format("truetype");
+	src: url("../fonts/AcerFocoBlack.otf?#iefix"), url("../fonts/AcerFocoBlack.ttf") format("truetype");
 	font-weight: 900;
 	font-style: normal;
 }
@@ -44,4 +44,40 @@
 	src: url("../fonts/AcerFocoSemiBoldItalic.otf?#iefix&"), url("../fonts/AcerFocoSemiBoldItalic.ttf") format("truetype");
 	font-weight: 700;
 	font-style: italic
+}
+
+@font-face {
+	font-family: 'Predator';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Predator'), local('Predator'), url("../fonts/PredatorRegular.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'Predator';
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Predator Italic'), local('Predator-Italic'), url("../fonts/PredatorItalic.woff2") format('woff2');
+}
+
+.Simple {
+	font-family: "Roboto", sans-serif !important;
+}
+
+.Stylish {
+	font-family: "Predator", sans-serif !important;
+}
+
+.Soft {
+	font-family: "Acer Foco", sans-serif !important;
+}
+
+.Black {
+	color: black;
+}
+
+.White {
+	color: white;
 }

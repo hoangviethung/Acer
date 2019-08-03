@@ -10,7 +10,8 @@ import pugTask from "./html"
 import cssCore from "./core-css"
 import cssTask from "./css"
 import {
-	copyImage
+	copyImage,
+	copyFonts
 } from "./copy";
 import {
 	cleanImage
@@ -43,7 +44,7 @@ export const server = () => {
 
 	watch([
 		"_vendor/**/**.css", "_vendor/**/**.js", "_vendor.json"
-	], parallel(jsCore, cssCore));
+	], parallel(jsCore, cssCore, copyFonts));
 
 	watch([
 		"dist"

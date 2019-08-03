@@ -1,0 +1,107 @@
+#best-friend-wrapper.best-friend-wrapper
+	.container
+		.title.popup
+			h2 Acer is your best friend
+		.best-friend-wrapper-bg
+			.btn-backhome
+				a(href="/")
+			.row
+				.col-lg-4(data-step="0").active
+					.content-box
+						h2.block-title Chọn chủ đề
+						nav.background-img
+							.loading#loading-popup
+							.img-nav#image-nav
+								- for(i=1;i<6;i++)
+									.col-6.col-sm-3.col-lg-6
+										.img-item
+											img.ofc(data-src="./img/blend/catinh/"+i+".jpg", alt="")
+								- for(i=1;i<7;i++)
+									.col-6.col-sm-3.col-lg-6
+										.img-item
+											img.ofc(data-src="./img/blend/gaming/"+i+".jpg", alt="")
+								- for(i=1;i<6;i++)
+									.col-6.col-sm-3.col-lg-6
+										.img-item
+											img.ofc(data-src="./img/blend/mong/"+i+".jpg", alt="")
+								- for(i=1;i<5;i++)
+									.col-6.col-sm-3.col-lg-6
+										.img-item
+											img.ofc(data-src="./img/blend/nangdong/"+i+".jpg", alt="")
+								- for(i=1;i<11;i++)
+									.col-6.col-sm-3.col-lg-6
+										.img-item
+											img.ofc(data-src="./img/blend/nhenhang/"+i+".jpg", alt="")
+						nav.type-image-nav
+							h2 Chủ đề
+							.type-image
+								a(href="javascript:void(0)" data-topic-id="0") #Gaming
+								a(href="javascript:void(0)" data-topic-id="1") #Thin&Light
+								a(href="javascript:void(0)" data-topic-id="2") #Perfomance
+								a(href="javascript:void(0)" data-topic-id="3") #Cátính
+								a(href="javascript:void(0)" data-topic-id="4") #Năngđộng
+								a(href="javascript:void(0)" data-topic-id="5") #Nhẹnhàng
+					.btn-wrapper
+						a.btn.btn-next(href="javascript:void(0)" data-to="1") 
+							span Tiếp
+							span.lnr.lnr-arrow-right
+				.col-lg-4(data-step="1")
+					.btn-back-wrapper
+						a.btn.btn-back(href="javascript:void(0)" data-to="0") 
+							span.lnr.lnr-arrow-left
+					.content-box
+						h2.block-title Định nghĩa bạn thân
+						.text-input
+							label(for="closefriend") #Bạn thân là:
+							textarea#text-input(maxlength="255")
+							p.string-length-left
+								span Còn 
+								span#string-length-left 255 
+								span  ký tự
+							#style
+								span.prev.lnr.lnr-chevron-left
+								ul
+									li(data-style="Soft") Mềm mại
+									li(data-style="Simple") Đơn giản
+									li(data-style="Stylish") Phong cách
+								span.next.lnr.lnr-chevron-right
+							ul#color
+								li.black(data-style="Black") 
+								li.white(data-style="White") 
+						.author-name
+							label(for="author") Tên mình là: 
+							input#author(type="text" name="author-name")
+					.btn-wrapper
+						a.btn.btn-next(href="javascript:void(0)" data-to="2") 
+							span Tiếp
+							span.lnr.lnr-arrow-right
+				.col-lg-4(data-step="2")
+					.btn-back-wrapper
+						a.btn.btn-back(href="javascript:void(0)" data-to="1") 
+							span.lnr.lnr-arrow-left
+					.content-box
+						#result
+							#result-img
+								img
+							#result-text-title #Bạn thân là:
+							#result-text
+						.button-wrapper
+							.top
+								a#send(href="javascript:void(0)" data-fancybox="send-friend" data-src="#send-friend-form") Gửi bạn bè
+								a#download.btn-sendinfo(data-method="download" href="javascript:void(0)") Tải về máy
+							.bottom
+								a#share.btn-sendinfo(data-method="shareFacebook" href="javascript:void(0)") Chia sẻ
+	a.hidden#download-hidden(href="#" download="bestfriend.png")
+	.d-none
+		#send-friend-form.fancybox-send-friend
+			.form-group
+				label(for="send-to") Tới
+				input#send-to(type="text")
+			.form-group
+				label(for="title") Tiêu đề
+				input#title(type="text")
+			.form-group
+				label(for="content") Nội dung
+				textarea#content
+			.form-button
+				button.btn-sendinfo(data-method="sendMail") Gửi

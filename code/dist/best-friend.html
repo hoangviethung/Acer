@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i&amp;display=swap&amp;subset=vietnamese">
+		<link rel="stylesheet" href="./css/core.min.css">
+		<link rel="stylesheet" href="./css/main.min.css">
+		<title></title>
+		<script>
+			(function () {
+				function id(v) { return document.getElementById(v); }
+				function loadbar() {
+					var ovrl = id("loading"),
+						prog = id("progress"),
+						stat = id("progstat"),
+						img = document.images,
+						c = 0,
+						tot = img.length;
+					if (tot == 0) return doneLoading();
+			
+					function imgLoaded() {
+						c += 1;
+						var perc = ((100 / tot * c) << 0);
+						prog.style.width = perc;
+						stat.innerHTML = perc;
+						if (c === tot) return doneLoading();
+					}
+					function doneLoading() {
+						ovrl.style.opacity = 0;
+						setTimeout(function () {
+							ovrl.style.display = "none";
+							document.getElementById("loading").parentNode.removeChild(document.getElementById("loading"))
+						}, 1000);
+					}
+					for (var i = 0; i < tot; i++) {
+						var tImg = new Image();
+						tImg.onload = imgLoaded;
+						tImg.onerror = imgLoaded;
+						tImg.src = img[i].src;
+					}
+				}
+				document.addEventListener('DOMContentLoaded', loadbar, false);
+			}());
+		</script>
+	</head>
+	<body class="best-friend-page">
+		<div id="loading">
+			<div class="logo-loader"><img src="./img/loading.svg" alt=""></div>
+			<div class="progstat-wrapper">Loading: <span id="progstat">0</span>%</div>
+			<div id="progress"></div>
+		</div>
+		<main>
+			<div class="best-friend-wrapper" id="best-friend-wrapper">
+				<div class="container">
+					<div class="title popup">
+						<h2>Acer is your best friend</h2>
+					</div>
+					<div class="best-friend-wrapper-bg">
+						<div class="btn-backhome"><a href="/"></a></div>
+						<div class="row">
+							<div class="col-lg-4 active" data-step="0">
+								<div class="content-box">
+									<h2 class="block-title">Chọn chủ đề</h2>
+									<nav class="background-img">
+										<div class="loading" id="loading-popup"></div>
+										<div class="img-nav" id="image-nav">
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/catinh/1.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/catinh/2.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/catinh/3.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/catinh/4.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/catinh/5.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/gaming/1.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/gaming/2.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/gaming/3.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/gaming/4.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/gaming/5.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/gaming/6.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/mong/1.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/mong/2.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/mong/3.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/mong/4.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/mong/5.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nangdong/1.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nangdong/2.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nangdong/3.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nangdong/4.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/1.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/2.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/3.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/4.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/5.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/6.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/7.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/8.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/9.jpg" alt=""></div>
+											</div>
+											<div class="col-6 col-sm-3 col-lg-6">
+												<div class="img-item"><img class="ofc" data-src="./img/blend/nhenhang/10.jpg" alt=""></div>
+											</div>
+										</div>
+									</nav>
+									<nav class="type-image-nav">
+										<h2>Chủ đề</h2>
+										<div class="type-image"><a href="javascript:void(0)" data-topic-id="0">#Gaming</a><a href="javascript:void(0)" data-topic-id="1">#Thin&Light</a><a href="javascript:void(0)" data-topic-id="2">#Perfomance</a><a href="javascript:void(0)" data-topic-id="3">#Cátính</a><a href="javascript:void(0)" data-topic-id="4">#Năngđộng</a><a href="javascript:void(0)" data-topic-id="5">#Nhẹnhàng</a></div>
+									</nav>
+								</div>
+								<div class="btn-wrapper"><a class="btn btn-next" href="javascript:void(0)" data-to="1"> <span>Tiếp</span><span class="lnr lnr-arrow-right"></span></a></div>
+							</div>
+							<div class="col-lg-4" data-step="1">
+								<div class="btn-back-wrapper"><a class="btn btn-back" href="javascript:void(0)" data-to="0"> <span class="lnr lnr-arrow-left"></span></a></div>
+								<div class="content-box">
+									<h2 class="block-title">Định nghĩa bạn thân</h2>
+									<div class="text-input">
+										<label for="closefriend">#Bạn thân là:</label>
+										<textarea id="text-input" maxlength="255"></textarea>
+										<p class="string-length-left"><span>Còn </span><span id="string-length-left">255 </span><span> ký tự</span></p>
+										<div id="style"><span class="prev lnr lnr-chevron-left"></span>
+											<ul>
+												<li data-style="Soft">Mềm mại</li>
+												<li data-style="Simple">Đơn giản</li>
+												<li data-style="Stylish">Phong cách</li>
+											</ul><span class="next lnr lnr-chevron-right"></span>
+										</div>
+										<ul id="color">
+											<li class="black" data-style="Black"> </li>
+											<li class="white" data-style="White"> </li>
+										</ul>
+									</div>
+									<div class="author-name">
+										<label for="author">Tên mình là: </label>
+										<input id="author" type="text" name="author-name">
+									</div>
+								</div>
+								<div class="btn-wrapper"><a class="btn btn-next" href="javascript:void(0)" data-to="2"> <span>Tiếp</span><span class="lnr lnr-arrow-right"></span></a></div>
+							</div>
+							<div class="col-lg-4" data-step="2">
+								<div class="btn-back-wrapper"><a class="btn btn-back" href="javascript:void(0)" data-to="1"> <span class="lnr lnr-arrow-left"></span></a></div>
+								<div class="content-box">
+									<div id="result">
+										<div id="result-img"><img></div>
+										<div id="result-text-title">#Bạn thân là:</div>
+										<div id="result-text"></div>
+									</div>
+									<div class="button-wrapper">
+										<div class="top"><a id="send" href="javascript:void(0)" data-fancybox="send-friend" data-src="#send-friend-form">Gửi bạn bè</a><a class="btn-sendinfo" id="download" data-method="download" href="javascript:void(0)">Tải về máy</a></div>
+										<div class="bottom"><a class="btn-sendinfo" id="share" data-method="shareFacebook" href="javascript:void(0)">Chia sẻ</a></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><a class="hidden" id="download-hidden" href="#" download="bestfriend.png"></a>
+				<div class="d-none">
+					<div class="fancybox-send-friend" id="send-friend-form">
+						<div class="form-group">
+							<label for="send-to">Tới</label>
+							<input id="send-to" type="text">
+						</div>
+						<div class="form-group">
+							<label for="title">Tiêu đề</label>
+							<input id="title" type="text">
+						</div>
+						<div class="form-group">
+							<label for="content">Nội dung</label>
+							<textarea id="content"></textarea>
+						</div>
+						<div class="form-button">
+							<button class="btn-sendinfo" data-method="sendMail">Gửi</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script src="./js/core.min.js"></script>
+		<script src="./js/main.min.js"></script>
+	</body>
+</html>

@@ -1,3 +1,4 @@
+// Define functions
 // Function thêm class lazyload vào các thẻ <img> có thuộc tính [data-src]
 const addClassLazyload = () => {
 	let imgList = document.querySelectorAll("img[data-src]")
@@ -145,6 +146,302 @@ const setHeightMobile = () => {
 	})
 }
 
+class Design {
+	constructor(imageNavSelector, textSelector, resultSelector) {
+		if (imageNavSelector != undefined && textSelector != undefined && resultSelector != undefined) {
+			this.imageNavSelector = imageNavSelector;
+			this.textSelector = textSelector;
+			this.resultSelector = resultSelector;
+			this.textSelector;
+			// this.enableTextInputCanBeEdited();
+			this.setHeightImageItem();
+			this.changeImage();
+			this.changeText();
+			this.download();
+			this.changeStyle();
+			this.nextBlock();
+		}
+	}
+	// enableTextInputCanBeEdited() {
+	// 	document.querySelector(this.textSelector).contentEditable = true;
+	// }
+	changeImage() {
+		if (document.querySelector(this.imageNavSelector) != null) {
+			let images = document.querySelector(this.imageNavSelector).querySelectorAll(".img-item")
+			Array.prototype.forEach.call(images, function (el, index) {
+
+				let current = index;
+				el.addEventListener('click', function () {
+					el.classList.add("active")
+					let imageUrl = el.querySelector("img").getAttribute("data-src")
+					document.querySelector("#result-img img").setAttribute('src', imageUrl)
+					let imagesNotClicked = Array.prototype.filter.call(images, function (value, index) {
+						return current !== index
+					})
+					Array.prototype.forEach.call(imagesNotClicked, function (el) {
+						el.classList.remove("active")
+					})
+				})
+			})
+			images[0].click();
+		}
+	}
+	setHeightImageItem() {
+		if (document.querySelector(this.imageNavSelector) != null) {
+			let images = document.querySelector(this.imageNavSelector).querySelectorAll(".img-item")
+			Array.prototype.forEach.call(images, function (el) {
+				el.style.height = el.offsetWidth + "px"
+			})
+			window.addEventListener("resize", function () {
+				Array.prototype.forEach.call(images, function (el) {
+					el.style.height = el.offsetWidth + "px"
+				})
+			})
+		}
+	}
+	changeText() {
+		if (document.querySelector(this.textSelector) != null) {
+			let textInput = document.querySelector(this.textSelector)
+			let maxLength = textInput.getAttribute("maxlength")
+			textInput.addEventListener("keyup", function (event) {
+				let text = textInput.value
+				// let realText = textInput.textContent
+				let currentLength = text.length
+				if (currentLength > 255) {
+					let backText = document.querySelector("#result-text").innerHTML
+					textInput.innerHTML = backText
+				} else {
+					let stringLengthLeft = maxLength - currentLength
+					document.querySelector("#result-text").innerHTML = text
+					document.querySelector("#string-length-left").innerHTML = stringLengthLeft
+				}
+			})
+			textInput.addEventListener("paste", function (e) {
+				let text = textInput.value
+				// let realText = textInput.textContent
+				let currentLength = text.length
+				if (currentLength > 255) {
+					let backText = document.querySelector("#result-text").innerHTML
+					textInput.innerHTML = backText
+				} else {
+					let stringLengthLeft = maxLength - currentLength
+					document.querySelector("#result-text").innerHTML = text
+					document.querySelector("#string-length-left").innerHTML = stringLengthLeft
+				}
+			})
+		}
+	}
+	download() {
+		if (document.querySelector("#download") != null) {
+			document.querySelector("#download").addEventListener("click", function () {
+				document.querySelector("#download").scrollTo({
+					'behavior': 'smooth',
+					'left': 0,
+					'top': 0
+				});
+				html2canvas(document.querySelector("#result")).then(canvas => {
+					let imgBase64 = canvas.toDataURL("image/png")
+					document.querySelector("#download-hidden").setAttribute("href", imgBase64)
+					document.querySelector("#download-hidden").click()
+				});
+			});
+		}
+	}
+	changeStyle() {
+		if (document.querySelectorAll("#style [data-style]").length > 0) {
+			let styleItems = document.querySelectorAll("#style [data-style]")
+			Array.prototype.forEach.call(styleItems, function (item, index) {
+				let current = index;
+				item.addEventListener("click", function (e) {
+					let style = item.getAttribute("data-style")
+					if (style == "Soft") {
+						document.querySelector("#result-text-title").classList.remove("Stylish")
+						document.querySelector("#result-text-title").classList.remove("Simple")
+						document.querySelector("#result-text").classList.remove("Stylish")
+						document.querySelector("#result-text").classList.remove("Simple")
+						document.querySelector(".text-input label").classList.remove("Stylish")
+						document.querySelector(".text-input label").classList.remove("Simple")
+						document.querySelector(".text-input textarea").classList.remove("Stylish")
+						document.querySelector(".text-input textarea").classList.remove("Simple")
+					} else if (style == "Stylish") {
+						document.querySelector("#result-text-title").classList.remove("Soft")
+						document.querySelector("#result-text-title").classList.remove("Simple")
+						document.querySelector("#result-text").classList.remove("Soft")
+						document.querySelector("#result-text").classList.remove("Simple")
+						document.querySelector(".text-input label").classList.remove("Soft")
+						document.querySelector(".text-input label").classList.remove("Simple")
+						document.querySelector(".text-input textarea").classList.remove("Soft")
+						document.querySelector(".text-input textarea").classList.remove("Simple")
+					} else {
+						document.querySelector("#result-text-title").classList.remove("Soft")
+						document.querySelector("#result-text-title").classList.remove("Stylish")
+						document.querySelector("#result-text").classList.remove("Soft")
+						document.querySelector("#result-text").classList.remove("Stylish")
+						document.querySelector(".text-input label").classList.remove("Soft")
+						document.querySelector(".text-input label").classList.remove("Stylish")
+						document.querySelector(".text-input textarea").classList.remove("Soft")
+						document.querySelector(".text-input textarea").classList.remove("Stylish")
+					}
+
+					document.querySelector("#result-text-title").classList.add(style)
+					document.querySelector("#result-text").classList.add(style)
+					document.querySelector(".text-input label").classList.add(style)
+					document.querySelector(".text-input textarea").classList.add(style)
+					item.classList.add("active")
+					let styleItemsNotClicked = Array.prototype.filter.call(styleItems, function (value, index) {
+						return current !== index
+					})
+					Array.prototype.forEach.call(styleItemsNotClicked, function (el) {
+						el.classList.remove("active")
+					})
+				})
+			})
+			let styleCurrent = 0;
+			let prev = document.querySelector("#style .prev")
+			let next = document.querySelector("#style .next")
+			styleItems[styleCurrent].click();
+			prev.addEventListener("click", function () {
+				if (styleCurrent <= 0) {
+					styleCurrent = styleItems.length - 1
+				} else {
+					styleCurrent--;
+				}
+				styleItems[styleCurrent].click();
+			})
+			next.addEventListener("click", function () {
+				if (styleCurrent >= styleItems.length - 1) {
+					styleCurrent = 0
+				} else {
+					styleCurrent++;
+				}
+				styleItems[styleCurrent].click();
+			})
+		}
+
+		if (document.querySelectorAll("#color [data-style]").length > 0) {
+			let colorItems = document.querySelectorAll("#color [data-style]")
+			Array.prototype.forEach.call(colorItems, function (item, index) {
+				let current = index;
+				item.addEventListener("click", function (e) {
+					let style = item.getAttribute("data-style")
+					if (style == "White") {
+						document.querySelector("#result-text-title").classList.remove("Black")
+						document.querySelector("#result-text").classList.remove("Black")
+						document.querySelector(".text-input label").classList.remove("Black")
+						document.querySelector(".text-input textarea").classList.remove("Black")
+					} else {
+						document.querySelector("#result-text-title").classList.remove("White")
+						document.querySelector("#result-text").classList.remove("White")
+						document.querySelector(".text-input label").classList.remove("White")
+						document.querySelector(".text-input textarea").classList.remove("White")
+					}
+					document.querySelector(".text-input label").classList.add(style)
+					document.querySelector(".text-input textarea").classList.add(style)
+					document.querySelector("#result-text").classList.add(style)
+					document.querySelector("#result-text-title").classList.add(style)
+					item.classList.add("active")
+					let colorItemsNotClicked = Array.prototype.filter.call(colorItems, function (value, index) {
+						return current !== index
+					})
+					Array.prototype.forEach.call(colorItemsNotClicked, function (el) {
+						el.classList.remove("active")
+					})
+				})
+			})
+			colorItems[0].click();
+		}
+
+	}
+	nextBlock() {
+		if (document.querySelectorAll("[data-to]") != null) {
+			Array.prototype.forEach.call(document.querySelectorAll("[data-to]"), function (ele) {
+				ele.addEventListener("click", function (e) {
+					e.preventDefault();
+					let target = parseInt(ele.getAttribute("data-to"))
+					let stepList = document.querySelectorAll("[data-step]")
+					Array.prototype.forEach.call(stepList, function (el) {
+						el.classList.remove("active")
+					})
+					stepList[target].classList.add("active")
+				})
+			})
+		}
+	}
+}
+
+$("[data-fancybox='best-friend']").fancybox({
+	touch: false,
+	afterLoad: function () {
+		let images = document.querySelector("#image-nav").querySelectorAll(".img-item")
+		Array.prototype.forEach.call(images, function (el) {
+			el.style.height = el.offsetWidth + "px"
+		})
+	},
+	afterClose: function () {
+		$(".best-friend-wrapper [data-step]").removeClass("active")
+		$(".best-friend-wrapper [data-step]").eq(0).addClass("active")
+	}
+})
+
+// Set the date we're counting down to
+var countDownDate = new Date("Aug 24, 2019 23:59:59").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function () {
+	// Get today's date and time
+	var now = new Date().getTime();
+
+	// Find the distance between now and the count down date
+	var distance = countDownDate - now;
+
+	// Time calculations for days, hours, minutes and seconds
+	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	// var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	// Display the result in the element with id="demo"
+	try {
+		document.getElementById("days").innerHTML = days;
+		document.getElementById("hours").innerHTML = hours;
+		document.getElementById("minutes").innerHTML = minutes;
+		// If the count down is finished, write some text 
+		if (distance < 0) {
+			clearInterval(x);
+			document.getElementById("demo").innerHTML = "EXPIRED";
+		}
+	} catch (error) {
+
+	}
+}, 1000);
+
+const getInformation = () => {
+	let obj = {
+		formSendMail: {}
+	}
+	$(".btn-sendinfo").on("click", function () {
+		obj["method"] = $(this).attr("data-method")
+		html2canvas(document.querySelector("#result")).then(canvas => {
+			obj["image"] = canvas.toDataURL("image/png")
+		});
+		obj["content"] = $("#text-input").val()
+		obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
+		obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
+		obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
+		obj["authorName"] = $("#author").val()
+		let dataTopicId = $('.type-image a[data-topic-id].active').attr("data-topic-id")
+		if (dataTopicId != undefined) {
+			obj["topicId"] = dataTopicId
+		} else {
+			obj["topicId"] = null;
+		}
+		console.log(obj);
+	})
+	return obj;
+}
+// End define functions
+
+// Call functions
 $(document).ready(function () {
 	// Luôn luôn chậy polyfill cho thuôc tính object-fit: cover trên các phiên bản IE >= 9
 	objectFitImages("img.ofc");
@@ -157,17 +454,31 @@ $(document).ready(function () {
 	checkBreakpoint();
 	setHeightMobile();
 	mobileMenuToggle();
-})
+	var des = new Design("#image-nav", "#text-input", "#result");
+	getInformation();
 
+	$("body").on("click", ".type-image-nav .type-image a", function () {
+		$(this).addClass('active')
+		$(this).siblings().removeClass("active")
+		$("#loading-popup").addClass("show")
+		setTimeout(() => {
+			$("#loading-popup").removeClass("show")
+		}, 1000)
+	})
+
+
+})
 
 $(window).on("scroll", function () {
 	activeWhenScrollTo();
 })
-
 
 $(document).ajaxComplete(function () {
 	// Luôn luôn chậy polyfill cho thuôc tính object-fit: cover trên các phiên bản IE >= 9
 	objectFitImages("img.ofc");
 	// Luôn luôn addClass lazyload cho các hình ảnh có thuộc tính [data-src]
 	addClassLazyload();
+	des.setHeightImageItem()
+	des.changeImage()
 })
+// End call functions

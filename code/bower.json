@@ -23,6 +23,7 @@
     "font-awesome": "5.9.0",
     "linearicons": "1.0.1",
     "lazysizes": "5.1.0",
-    "object-fit-images": "*"
+    "object-fit-images": "*",
+    "html2canvas": "^0.4.1"
   }
 }
