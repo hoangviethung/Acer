@@ -536,7 +536,7 @@
 			border-radius: 16px;
 			text-transform: uppercase;
 			color: white;
-			font-size: 12px;
+			font-size: 14px;
 			font-weight: 700;
 			height: 32px;
 			display: inline-flex;
@@ -550,7 +550,7 @@
 			border-radius: 16px;
 			text-transform: uppercase;
 			color: white;
-			font-size: 12px;
+			font-size: 14px;
 			font-weight: 700;
 			height: 32px;
 			display: inline-flex;
@@ -558,6 +558,10 @@
 			justify-content: center;
 			align-items: center;
 			background: #3a559f;
+			span.mdi{
+				font-size: 14px;
+				margin-right: 7px;
+			}
 		}
 	}
 }
