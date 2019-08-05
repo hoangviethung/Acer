@@ -481,7 +481,6 @@ $(document).ready(function () {
 	setHeightMobile();
 	mobileMenuToggle();
 	var des = new Design("#image-nav", "#text-input", "#result");
-	getInformation();
 
 	$("body").on("click", ".type-image-nav .type-image a", function () {
 		$(this).addClass('active')
