@@ -414,22 +414,26 @@ var x = setInterval(function () {
 	}
 }, 1000);
 
+
+var obj = {
+	formSendMail: {
+		sendTo: "",
+		title: "",
+		content: "",
+	},
+	image: "",
+	method: "",
+	content: "",
+	authorName: "",
+	topicId: "",
+}
 const getInformation = () => {
-	var obj = {
-		formSendMail: {
-			sendTo: null,
-			title: null,
-			content: null,
-		},
-		image: null,
-		method: null,
-		content: null,
-		authorName: null,
-		topicId: null,
-	}
 	window.scrollTo(0, 0)
+
 	setTimeout(() => {
-		html2canvas(document.querySelector("#result")).then(canvas => {
+		html2canvas(document.querySelector("#result"), {
+			imageTimeout: 500,
+		}).then(canvas => {
 			obj["image"] = canvas.toDataURL("image/png")
 			obj["method"] = $(this).attr("data-method")
 			obj["content"] = $("#text-input").val()
@@ -445,7 +449,7 @@ const getInformation = () => {
 			}
 		});
 	}, 1000);
-	return obj;
+	return JSON.stringify(obj)
 }
 
 const getResult = () => {
@@ -487,8 +491,6 @@ $(document).ready(function () {
 			$("#loading-popup").removeClass("show")
 		}, 1000)
 	})
-
-
 })
 
 $(window).on("scroll", function () {
