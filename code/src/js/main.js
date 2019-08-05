@@ -431,18 +431,9 @@ const getInformation = () => {
 		// $("html,body").animate({
 		// 	scrollTop: 0
 		// }, 100)
-		window.scrollTo(0,0)
+		window.scrollTo(0, 0)
 		setTimeout(() => {
-			document.getElementById('result').parentNode.style.overflow = 'visible';
-			html2canvas(document.querySelector("#result"), {
-				removeContainer: false,
-				onrendered: function (canvas) {
-					document.getElementById('result').parentNode.style.overflow = 'hidden';
-					// var dataUrl = canvas.toDataURL();
-					// window.open(dataUrl, "toDataURL() image", "width=800, height=800");
-					//Canvas2Image.saveAsPNG(canvas);
-				}
-			}).then(canvas => {
+			html2canvas(document.querySelector("#result")).then(canvas => {
 				obj["image"] = canvas.toDataURL("image/png")
 				obj["method"] = $(this).attr("data-method")
 				obj["content"] = $("#text-input").val()
