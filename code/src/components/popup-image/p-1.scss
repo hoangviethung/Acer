@@ -3,7 +3,7 @@
 	background: rgba(black, .8);
 	padding: 20px 0 !important;
 	// border-radius: 30px;
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	align-items: center;
 
@@ -137,11 +137,13 @@
 			padding: 0 15px;
 			background: #08444e;
 			color: white;
+			display: flex;
+			align-items: center;
 			text-transform: uppercase;
 
 			.lnr {
 				margin-left: 5px;
-
+				line-height: 1;
 			}
 		}
 	}
@@ -362,9 +364,10 @@
 			flex-basis: 0;
 			flex-grow: 1;
 			max-width: 100%;
-			border: 0;
 			background: transparent;
-			border-bottom: 1px solid rgba(black, .5)
+			border: 0 solid transparent;
+			border-bottom: 1px solid rgba(black, .5);
+			border-radius: 0;
 		}
 	}
 
@@ -397,21 +400,64 @@
 			left: 20px;
 		}
 
-		.string-length-left {
-			position: absolute;
+		.text-input-option {
 			bottom: 10px;
-			right: 10px;
-			font-size: 13px;
+			position: absolute;
+			display: flex;
+			align-items: center;
+			width: 100%;
+			z-index: 2;
 		}
 
-		#string-length-left {
-			font-weight: 700;
+		.string-length-left {
+			position: absolute;
+			right: 10px;
+			font-size: 13px;
+
+			#string-length-left {
+				font-weight: 700;
+			}
+		}
+
+		#style {
+			left: 10px;
+			display: flex;
+			align-items: center;
+			z-index: 5;
+
+			ul {
+				list-style-type: none;
+				padding-left: 0;
+			}
+
+			.lnr {
+				padding: 0 2px;
+				font-size: 12px;
+				cursor: pointer;
+				line-height: 1;
+			}
+
+			li {
+				width: 72px;
+				text-align: center;
+				font-size: 12px;
+				cursor: pointer;
+				white-space: nowrap;
+				border: 1px solid #333333;
+				border-radius: 10px;
+				line-height: 20px;
+				padding: 0px;
+				display: none;
+
+				&.active {
+					display: block;
+				}
+			}
 		}
 
 		#color {
 			position: absolute;
 			left: 130px;
-			bottom: 10px;
 			height: 22px;
 			display: flex;
 			align-items: center;
@@ -447,43 +493,6 @@
 				}
 			}
 		}
-
-		#style {
-			position: absolute;
-			left: 10px;
-			bottom: 10px;
-			display: flex;
-			align-items: center;
-			z-index: 5;
-
-			ul {
-				list-style-type: none;
-				padding-left: 0;
-			}
-
-			.lnr {
-				padding: 0 2px;
-				font-size: 12px;
-				cursor: pointer;
-			}
-
-			li {
-				width: 72px;
-				text-align: center;
-				font-size: 12px;
-				cursor: pointer;
-				white-space: nowrap;
-				border: 1px solid #333333;
-				border-radius: 10px;
-				line-height: 20px;
-				padding: 0px;
-				display: none;
-
-				&.active {
-					display: block;
-				}
-			}
-		}
 	}
 
 	#result {
@@ -513,6 +522,7 @@
 
 		#result-text {
 			position: absolute;
+			word-break: break-word;
 			top: 0;
 			left: 0;
 			width: 100%;
@@ -558,7 +568,8 @@
 			justify-content: center;
 			align-items: center;
 			background: #3a559f;
-			span.mdi{
+
+			span.mdi {
 				font-size: 14px;
 				margin-right: 7px;
 			}
@@ -587,6 +598,7 @@
 		border: 1px solid white;
 		border-radius: 50%;
 		padding: 2px;
+
 		svg {
 			path {
 				fill: white;

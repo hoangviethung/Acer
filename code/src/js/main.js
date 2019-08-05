@@ -416,24 +416,48 @@ var x = setInterval(function () {
 
 const getInformation = () => {
 	let obj = {
-		formSendMail: {}
+		formSendMail: {
+			sendTo: null,
+			title: null,
+			content: null,
+		},
+		image: null,
+		method: null,
+		content: null,
+		authorName: null,
+		topicId: null,
 	}
 	$(".btn-sendinfo").on("click", function () {
-		obj["method"] = $(this).attr("data-method")
-		html2canvas(document.querySelector("#result")).then(canvas => {
-			obj["image"] = canvas.toDataURL("image/png")
-		});
-		obj["content"] = $("#text-input").val()
-		obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
-		obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
-		obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
-		obj["authorName"] = $("#author").val()
-		let dataTopicId = $('.type-image a[data-topic-id].active').attr("data-topic-id")
-		if (dataTopicId != undefined) {
-			obj["topicId"] = dataTopicId
-		} else {
-			obj["topicId"] = null;
-		}
+		// $("html,body").animate({
+		// 	scrollTop: 0
+		// }, 100)
+		window.scrollTo(0,0)
+		setTimeout(() => {
+			document.getElementById('result').parentNode.style.overflow = 'visible';
+			html2canvas(document.querySelector("#result"), {
+				removeContainer: false,
+				onrendered: function (canvas) {
+					document.getElementById('result').parentNode.style.overflow = 'hidden';
+					// var dataUrl = canvas.toDataURL();
+					// window.open(dataUrl, "toDataURL() image", "width=800, height=800");
+					//Canvas2Image.saveAsPNG(canvas);
+				}
+			}).then(canvas => {
+				obj["image"] = canvas.toDataURL("image/png")
+				obj["method"] = $(this).attr("data-method")
+				obj["content"] = $("#text-input").val()
+				obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
+				obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
+				obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
+				obj["authorName"] = $("#author").val()
+				let dataTopicId = $('.type-image a[data-topic-id].active').attr("data-topic-id")
+				if (dataTopicId != undefined) {
+					obj["topicId"] = dataTopicId
+				} else {
+					obj["topicId"] = null;
+				}
+			});
+		}, 1000);
 		console.log(obj);
 	})
 	return obj;
