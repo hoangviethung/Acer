@@ -415,7 +415,7 @@ var x = setInterval(function () {
 }, 1000);
 
 const getInformation = () => {
-	let obj = {
+	var obj = {
 		formSendMail: {
 			sendTo: null,
 			title: null,
@@ -427,31 +427,39 @@ const getInformation = () => {
 		authorName: null,
 		topicId: null,
 	}
-	$(".btn-sendinfo").on("click", function () {
-		// $("html,body").animate({
-		// 	scrollTop: 0
-		// }, 100)
-		window.scrollTo(0, 0)
-		setTimeout(() => {
-			html2canvas(document.querySelector("#result")).then(canvas => {
-				obj["image"] = canvas.toDataURL("image/png")
-				obj["method"] = $(this).attr("data-method")
-				obj["content"] = $("#text-input").val()
-				obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
-				obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
-				obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
-				obj["authorName"] = $("#author").val()
-				let dataTopicId = $('.type-image a[data-topic-id].active').attr("data-topic-id")
-				if (dataTopicId != undefined) {
-					obj["topicId"] = dataTopicId
-				} else {
-					obj["topicId"] = null;
-				}
-			});
-		}, 1000);
-		console.log(obj);
-	})
+	window.scrollTo(0, 0)
+	setTimeout(() => {
+		html2canvas(document.querySelector("#result")).then(canvas => {
+			obj["image"] = canvas.toDataURL("image/png")
+			obj["method"] = $(this).attr("data-method")
+			obj["content"] = $("#text-input").val()
+			obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
+			obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
+			obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
+			obj["authorName"] = $("#author").val()
+			let dataTopicId = $('.type-image a[data-topic-id].active').attr("data-topic-id")
+			if (dataTopicId != undefined) {
+				obj["topicId"] = dataTopicId
+			} else {
+				obj["topicId"] = null;
+			}
+		});
+	}, 1000);
 	return obj;
+}
+
+const getResult = () => {
+	$.ajax({
+		url: '/chia-se',
+		method: "POST",
+		success: function (response) {
+			if (response.Code == 400) {
+				alert("400")
+			} else {
+				window.location.assign(url)
+			}
+		}
+	})
 }
 // End define functions
 
