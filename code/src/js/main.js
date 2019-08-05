@@ -415,41 +415,27 @@ var x = setInterval(function () {
 }, 1000);
 
 
-var obj = {
-	formSendMail: {
-		sendTo: "",
-		title: "",
-		content: "",
-	},
-	image: "",
-	method: "",
-	content: "",
-	authorName: "",
-	topicId: "",
-}
+var obj;
 const getInformation = () => {
 	window.scrollTo(0, 0)
 
 	setTimeout(() => {
+		
+		obj["method"] = $(this).attr("data-method")
+		obj["content"] = $("#text-input").val()
+		obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
+		obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
+		obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
+		obj["authorName"] = $("#author").val()
+		obj["topicId"] = $('.type-image a[data-topic-id].active').attr("data-topic-id")
 		html2canvas(document.querySelector("#result"), {
 			imageTimeout: 500,
 		}).then(canvas => {
 			obj["image"] = canvas.toDataURL("image/png")
-			obj["method"] = $(this).attr("data-method")
-			obj["content"] = $("#text-input").val()
-			obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
-			obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
-			obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
-			obj["authorName"] = $("#author").val()
-			let dataTopicId = $('.type-image a[data-topic-id].active').attr("data-topic-id")
-			if (dataTopicId != undefined) {
-				obj["topicId"] = dataTopicId
-			} else {
-				obj["topicId"] = null;
-			}
 		});
 	}, 1000);
-	return JSON.stringify(obj)
+
+	return obj;
 }
 
 const getResult = () => {
@@ -489,6 +475,11 @@ $(document).ready(function () {
 		setTimeout(() => {
 			$("#loading-popup").removeClass("show")
 		}, 1000)
+	})
+
+
+	$(".btn-sendinfo").on("click", function () {
+		getInformation()
 	})
 })
 
