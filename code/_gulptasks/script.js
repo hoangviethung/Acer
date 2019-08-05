@@ -15,7 +15,9 @@ export const jsTask = () => {
 		.pipe(babel({
 			presets: ["@babel/preset-env"]
 		}))
-		.pipe(uglifyBabel())
+		.pipe(uglifyBabel({
+			mangle: false,
+		}))
 		.pipe(rename("main.min.js"))
 		.pipe(sourcemap.write("."))
 		.pipe(dest("dist/js"))

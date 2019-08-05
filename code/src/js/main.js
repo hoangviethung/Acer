@@ -368,19 +368,32 @@ class Design {
 	}
 }
 
-$("[data-fancybox='best-friend']").fancybox({
-	touch: false,
-	afterLoad: function () {
-		let images = document.querySelector("#image-nav").querySelectorAll(".img-item")
-		Array.prototype.forEach.call(images, function (el) {
-			el.style.height = el.offsetWidth + "px"
-		})
-	},
-	afterClose: function () {
-		$(".best-friend-wrapper [data-step]").removeClass("active")
-		$(".best-friend-wrapper [data-step]").eq(0).addClass("active")
-	}
-})
+const customFancybox = () => {
+	$("[data-fancybox='best-friend']").fancybox({
+		touch: false,
+		afterLoad: function () {
+			let images = document.querySelector("#image-nav").querySelectorAll(".img-item")
+			Array.prototype.forEach.call(images, function (el) {
+				el.style.height = el.offsetWidth + "px"
+			})
+		},
+		afterClose: function () {
+			$(".best-friend-wrapper [data-step]").removeClass("active")
+			$(".best-friend-wrapper [data-step]").eq(0).addClass("active")
+		}
+	})
+}
+
+const changeTopicID = () => {
+	$("body").on("click", ".type-image-nav .type-image a", function () {
+		$(this).addClass('active')
+		$(this).siblings().removeClass("active")
+		$("#loading-popup").addClass("show")
+		setTimeout(() => {
+			$("#loading-popup").removeClass("show")
+		}, 1000);
+	})
+}
 
 // Set the date we're counting down to
 var countDownDate = new Date("Aug 24, 2019 23:59:59").getTime();
@@ -414,43 +427,54 @@ var x = setInterval(function () {
 	}
 }, 1000);
 
-
-var obj;
-const getInformation = () => {
-	window.scrollTo(0, 0)
-
-	setTimeout(() => {
-		
-		obj["method"] = $(this).attr("data-method")
-		obj["content"] = $("#text-input").val()
-		obj["formSendMail"]["sendTo"] = $("#send-friend-form #send-to").val()
-		obj["formSendMail"]["title"] = $("#send-friend-form #title").val()
-		obj["formSendMail"]["content"] = $("#send-friend-form #content").val()
-		obj["authorName"] = $("#author").val()
-		obj["topicId"] = $('.type-image a[data-topic-id].active').attr("data-topic-id")
-		html2canvas(document.querySelector("#result"), {
-			imageTimeout: 500,
-		}).then(canvas => {
-			obj["image"] = canvas.toDataURL("image/png")
-		});
-	}, 1000);
-
-	return obj;
-}
-
-const getResult = () => {
-	$.ajax({
-		url: '/chia-se',
-		method: "POST",
-		success: function (response) {
-			if (response.Code == 400) {
-				alert("400")
-			} else {
-				window.location.assign(url)
-			}
+function getInformation(params) {
+	var result = new Promise((resolve, reject) => {
+		html2canvas(document.getElementById("result")).then((canvas) => {
+			resolve(canvas.toDataURL("image/png"))
+		})
+	})
+	result.then(imageCanvas => {
+		var topicIdSeletor = document.querySelector("[data-topic-id].active");
+		var topicId;
+		if (topicIdSeletor) {
+			topicId = document.querySelector("[data-topic-id].active").getAttribute("data-topic-id")
 		}
+		var obj = {
+			formSendMail: {
+				formTitle: document.querySelector("#title").value,
+				formSendTo: document.querySelector("#send-to").value,
+				formContent: document.querySelector("#content").value,
+			},
+			authorName: document.querySelector("#author").value,
+			content: document.querySelector("#text-input").value,
+			image: imageCanvas,
+			topicId: topicId,
+			method: params,
+		}
+		var objJson = JSON.stringify(obj)
+		// Show kết quả
+		console.log("-------");
+		console.log(obj);
+		console.log("-------");
+		console.log(objJson);
+		console.log("-------");
+		// End show kết quả
+		$.ajax({
+			url: '/chia-se',
+			method: "POST",
+			data: obj,
+			success: function (response) {
+				if (response.Code == 400) {
+					alert("400")
+					// do something when response.status = 400
+				} else {
+					// do something when response.status = 200
+				}
+			}
+		})
 	})
 }
+
 // End define functions
 
 // Call functions
@@ -466,33 +490,28 @@ $(document).ready(function () {
 	checkBreakpoint();
 	setHeightMobile();
 	mobileMenuToggle();
+	customFancybox();
+	changeTopicID();
+
 	var des = new Design("#image-nav", "#text-input", "#result");
 
-	$("body").on("click", ".type-image-nav .type-image a", function () {
-		$(this).addClass('active')
-		$(this).siblings().removeClass("active")
-		$("#loading-popup").addClass("show")
-		setTimeout(() => {
-			$("#loading-popup").removeClass("show")
-		}, 1000)
-	})
-
-
 	$(".btn-sendinfo").on("click", function () {
-		getInformation()
+		let method = $(this).attr("data-method")
+		getInformation(method);
+	})
+
+	$(window).on("scroll", function () {
+		activeWhenScrollTo();
+	})
+
+	$(document).ajaxComplete(function () {
+		// Luôn luôn chậy polyfill cho thuôc tính object-fit: cover trên các phiên bản IE >= 9
+		objectFitImages("img.ofc");
+		// Luôn luôn addClass lazyload cho các hình ảnh có thuộc tính [data-src]
+		addClassLazyload();
+		des.setHeightImageItem()
+		des.changeImage()
 	})
 })
 
-$(window).on("scroll", function () {
-	activeWhenScrollTo();
-})
-
-$(document).ajaxComplete(function () {
-	// Luôn luôn chậy polyfill cho thuôc tính object-fit: cover trên các phiên bản IE >= 9
-	objectFitImages("img.ofc");
-	// Luôn luôn addClass lazyload cho các hình ảnh có thuộc tính [data-src]
-	addClassLazyload();
-	des.setHeightImageItem()
-	des.changeImage()
-})
 // End call functions
