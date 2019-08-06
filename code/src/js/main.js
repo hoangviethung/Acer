@@ -182,7 +182,6 @@ class Design {
 					})
 				})
 			})
-			images[0].click();
 		}
 	}
 	setHeightImageItem() {
@@ -478,51 +477,52 @@ function getInformation(params) {
 		})
 	})
 	result.then(imageCanvas => {
-		var ImageURL = imageCanvas;
-		var block = ImageURL.split(";");
-		// Get the content type
-		var contentType = block[0].split(":")[1]; // In this case "image/gif"
-		// get the real base64 content of the file
-		var realData = block[1].split(",")[1];
-		var blob = b64toBlob(realData, contentType);
-		var topicIdSeletor = document.querySelector("[data-topic-id].active");
-		var topicId;
-		if (topicIdSeletor) {
-			topicId = document.querySelector("[data-topic-id].active").getAttribute("data-topic-id")
-		}
-		var imageActiveDataSrc = document.querySelector("#image-nav .img-item.active img").getAttribute("data-src")
-		var imageActiveFilename = imageActiveDataSrc.split(/(\\|\/)/g).pop()
+		if (params !== "download") {
+			var ImageURL = imageCanvas;
+			var block = ImageURL.split(";");
+			// Get the content type
+			var contentType = block[0].split(":")[1]; // In this case "image/gif"
+			// get the real base64 content of the file
+			var realData = block[1].split(",")[1];
+			var blob = b64toBlob(realData, contentType);
+			var topicIdSeletor = document.querySelector("[data-topic-id].active");
+			var topicId;
+			if (topicIdSeletor) {
+				topicId = document.querySelector("[data-topic-id].active").getAttribute("data-topic-id")
+			}
+			var imageActiveDataSrc = document.querySelector("#image-nav .img-item.active img").getAttribute("data-src")
+			var imageActiveFilename = imageActiveDataSrc.split(/(\\|\/)/g).pop()
 
-		var formData = new FormData();
-		formData.append('authorName', document.querySelector("#author").value)
-		formData.append('content', document.querySelector("#text-input").value)
-		formData.append('image', blob, imageActiveFilename)
-		formData.append('topicId', topicId)
-		formData.append('method', params)
-		formData.append('formTitle', document.querySelector("#title").value)
-		formData.append('formSendTo', document.querySelector("#send-to").value)
-		formData.append('formContent', document.querySelector("#content").value)
-		if (params == "download") {
+			var formData = new FormData();
+			formData.append('authorName', document.querySelector("#author").value)
+			formData.append('content', document.querySelector("#text-input").value)
+			formData.append('image', blob, imageActiveFilename)
+			formData.append('topicId', topicId)
+			formData.append('method', params)
+			formData.append('formTitle', document.querySelector("#title").value)
+			formData.append('formSendTo', document.querySelector("#send-to").value)
+			formData.append('formContent', document.querySelector("#content").value)
 			document.querySelector("#download-hidden").setAttribute("href", imageCanvas)
 			document.querySelector("#download-hidden").click()
-		}
-		$.ajax({
-			url: '/chia-se',
-			method: "POST",
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function (response) {
-				if (response.Code == 400) {
-					alert(response.Message)
-				} else {
-					window.location.assign(response.Result)
+
+			$.ajax({
+				url: '/chia-se',
+				method: "POST",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function (response) {
+					if (response.Code == 400) {
+						alert(response.Message)
+					} else {
+						window.location.assign(response.Result)
+					}
+				},
+				error: function () {
+					alert("Có lỗi xảy ra!");
 				}
-			},
-			error: function () {
-				alert("Có lỗi xảy ra!");
-			}
-		})
+			})
+		}
 	})
 }
 
