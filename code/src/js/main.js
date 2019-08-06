@@ -465,11 +465,13 @@ function getInformation(params) {
 			data: obj,
 			success: function (response) {
 				if (response.Code == 400) {
-					alert("400")
-					// do something when response.status = 400
+					alert(response.Message)
 				} else {
-					// do something when response.status = 200
+					window.location.assign(url)
 				}
+			},
+			error: function () {
+				alert("Có lỗi xảy ra!");
 			}
 		})
 	})
