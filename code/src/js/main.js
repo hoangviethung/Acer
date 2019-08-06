@@ -428,6 +428,42 @@ var x = setInterval(function () {
 }, 1000);
 
 
+
+/**
+ * Convert a base64 string in a Blob according to the data and contentType.
+ * 
+ * @param b64Data {String} Pure base64 string without contentType
+ * @param contentType {String} the content type of the file i.e (image/jpeg - image/png - text/plain)
+ * @param sliceSize {Int} SliceSize to process the byteCharacters
+ * @see http://stackoverflow.com/questions/16245767/creating-a-blob-from-a-base64-string-in-javascript
+ * @return Blob
+ */
+function b64toBlob(b64Data, contentType, sliceSize) {
+	contentType = contentType || '';
+	sliceSize = sliceSize || 512;
+
+	var byteCharacters = atob(b64Data);
+	var byteArrays = [];
+
+	for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+		var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+		var byteNumbers = new Array(slice.length);
+		for (var i = 0; i < slice.length; i++) {
+			byteNumbers[i] = slice.charCodeAt(i);
+		}
+
+		var byteArray = new Uint8Array(byteNumbers);
+
+		byteArrays.push(byteArray);
+	}
+
+	var blob = new Blob(byteArrays, {
+		type: contentType
+	});
+	return blob;
+}
+
 function getInformation(params) {
 	var result = new Promise((resolve, reject) => {
 		html2canvas(document.getElementById("result")).then((canvas) => {
@@ -435,11 +471,20 @@ function getInformation(params) {
 		})
 	})
 	result.then(imageCanvas => {
+		var ImageURL = imageCanvas;
+		var block = ImageURL.split(";");
+		// Get the content type
+		var contentType = block[0].split(":")[1]; // In this case "image/gif"
+		// get the real base64 content of the file
+		var realData = block[1].split(",")[1];
+		var blob = b64toBlob(realData, contentType);
 		var topicIdSeletor = document.querySelector("[data-topic-id].active");
 		var topicId;
 		if (topicIdSeletor) {
 			topicId = document.querySelector("[data-topic-id].active").getAttribute("data-topic-id")
 		}
+
+
 		// var obj = {
 		// 	authorName: document.querySelector("#author").value,
 		// 	content: document.querySelector("#text-input").value,
@@ -453,10 +498,14 @@ function getInformation(params) {
 		// 	}
 		// }
 
+
+
+
+
 		var formData = new FormData();
 		formData.append('authorName', document.querySelector("#author").value)
 		formData.append('content', document.querySelector("#text-input").value)
-		formData.append('image', imageCanvas)
+		formData.append('image', blob)
 		formData.append('topicId', topicId)
 		formData.append('method', params)
 		formData.append('formTitle', document.querySelector("#title").value)
