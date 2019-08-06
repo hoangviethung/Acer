@@ -459,7 +459,7 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 	}
 
 	var blob = new Blob(byteArrays, {
-		type: contentType
+		type: contentType,
 	});
 	return blob;
 }
@@ -483,7 +483,8 @@ function getInformation(params) {
 		if (topicIdSeletor) {
 			topicId = document.querySelector("[data-topic-id].active").getAttribute("data-topic-id")
 		}
-
+		var imageActiveDataSrc = document.querySelector("#image-nav .img-item.active img").getAttribute("data-src")
+		var imageActiveFilename = imageActiveDataSrc.split(/(\\|\/)/g).pop()
 
 		// var obj = {
 		// 	authorName: document.querySelector("#author").value,
@@ -500,17 +501,16 @@ function getInformation(params) {
 
 
 
-
-
 		var formData = new FormData();
 		formData.append('authorName', document.querySelector("#author").value)
 		formData.append('content', document.querySelector("#text-input").value)
-		formData.append('image', blob)
+		formData.append('image', blob, imageActiveFilename)
 		formData.append('topicId', topicId)
 		formData.append('method', params)
 		formData.append('formTitle', document.querySelector("#title").value)
 		formData.append('formSendTo', document.querySelector("#send-to").value)
 		formData.append('formContent', document.querySelector("#content").value)
+		console.log(formData.get("image"));
 		$.ajax({
 			url: '/chia-se',
 			method: "POST",
