@@ -562,6 +562,7 @@ $(document).ready(function () {
 		addClassLazyload();
 		des.setHeightImageItem()
 		des.changeImage()
+		document.querySelector("#image-nav").querySelectorAll(".img-item")[0].click()
 	})
 })
 
