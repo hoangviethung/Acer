@@ -517,7 +517,9 @@ function getInformation(params) {
 					} else {
 						console.log(response.Result);
 						if (params == "shareFacebook") {
-							$("#facebook-share").append(`<div class="fb-share-button" data-href=${response.Result} data-layout=${button_count}></div>`)
+							var fullUrl = window.location.protocol + "//" + window.location.host + response.Result
+							console.log(fullUrl);
+							$("#facebook-share").append(`<div class="fb-share-button" data-href=${fullUrl} data-layout="button_count"></div>`)
 							$("body").find("#facebook-share .fb-share-button").trigger("click")
 						}
 						// window.location.assign(response.Result)
