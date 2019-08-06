@@ -516,7 +516,7 @@ function getInformation(params) {
 						alert(response.Message)
 					} else {
 						if (params == "shareFacebook") {
-							var fullUrl = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.protocol+"//" + window.location.host + response.Result
+							var fullUrl = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.protocol + "//" + window.location.host + response.Result
 							$("#facebook-share").append(`<a href=${fullUrl} target="_blank"></a>`)
 							window.open(fullUrl)
 						}
