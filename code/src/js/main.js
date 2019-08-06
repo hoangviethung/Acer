@@ -510,7 +510,6 @@ function getInformation(params) {
 		formData.append('formTitle', document.querySelector("#title").value)
 		formData.append('formSendTo', document.querySelector("#send-to").value)
 		formData.append('formContent', document.querySelector("#content").value)
-		console.log(formData.get("image"));
 		$.ajax({
 			url: '/chia-se',
 			method: "POST",
@@ -521,7 +520,7 @@ function getInformation(params) {
 				if (response.Code == 400) {
 					alert(response.Message)
 				} else {
-					window.location.assign(url)
+					window.location.assign(response.Result)
 				}
 			},
 			error: function () {
