@@ -515,7 +515,12 @@ function getInformation(params) {
 					if (response.Code == 400) {
 						alert(response.Message)
 					} else {
-						window.location.assign(response.Result)
+						console.log(response.Result);
+						if (params == "shareFacebook") {
+							$("#facebook-share").append(`<div class="fb-share-button" data-href=${response.Result} data-layout=${button_count}></div>`)
+							$("body").find("#facebook-share .fb-share-button").trigger("click")
+						}
+						// window.location.assign(response.Result)
 					}
 				},
 				error: function () {
@@ -525,7 +530,6 @@ function getInformation(params) {
 		}
 	})
 }
-
 // End define functions
 
 // Call functions
