@@ -462,20 +462,12 @@ function getInformation(params) {
 		formData.append('formTitle', document.querySelector("#title").value)
 		formData.append('formSendTo', document.querySelector("#send-to").value)
 		formData.append('formContent', document.querySelector("#content").value)
-		console.log(formData.get("authorName"));
-		// var objJson = JSON.stringify(obj)
-		// Show kết quả
-		// console.log("-------");
-		// console.log(obj);
-		// console.log("-------");
-		// console.log(objJson);
-		// console.log("-------");
-		// End show kết quả
 		$.ajax({
 			url: '/chia-se',
 			method: "POST",
 			data: formData,
 			processData: false,
+			contentType: false,
 			success: function (response) {
 				if (response.Code == 400) {
 					alert(response.Message)
