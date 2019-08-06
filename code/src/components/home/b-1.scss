@@ -445,6 +445,7 @@
 
 	.swiper-slide-active {
 		z-index: 2;
+
 		.button-video {
 			display: block;
 			transform: translate(-50%, -50%);
@@ -542,30 +543,47 @@
 
 .home-game {
 	padding-top: 40px;
-	background-image: url("../img/game_bg.jpg");
+	background-image: url("../img/game_3.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 	padding-bottom: 80px;
 
 	@media (max-width: 1024.98px) {
-		background-image: url("../img/m_game_bg.jpg");
-		padding-top: 130px;
+		background-image: url("../img/m_game_3.jpg");
+		padding-top: 80px;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 	}
 
+	img {
+		width: 100%;
+	}
+
+	.container-fluid {
+		.row {
+			justify-content: center;
+		}
+	}
+
 	.title {
 		margin-bottom: 0;
+
+		@media (min-width: 1025px) {
+			margin-top: 50px;
+		}
 	}
 
 	.item {
-		padding-top: 70px;
+		padding-top: 30px;
 
 		.img {
 			text-align: center;
 			margin-bottom: 100px;
+			max-width: 380px;
+			margin-left: auto;
+			margin-right: auto;
 
 			@media (max-width: 767.98px) {
 				padding: 0 20px;
