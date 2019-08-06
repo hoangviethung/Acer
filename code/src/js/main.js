@@ -427,6 +427,7 @@ var x = setInterval(function () {
 	}
 }, 1000);
 
+
 function getInformation(params) {
 	var result = new Promise((resolve, reject) => {
 		html2canvas(document.getElementById("result")).then((canvas) => {
@@ -439,30 +440,42 @@ function getInformation(params) {
 		if (topicIdSeletor) {
 			topicId = document.querySelector("[data-topic-id].active").getAttribute("data-topic-id")
 		}
-		var obj = {
-			formSendMail: {
-				formTitle: document.querySelector("#title").value,
-				formSendTo: document.querySelector("#send-to").value,
-				formContent: document.querySelector("#content").value,
-			},
-			authorName: document.querySelector("#author").value,
-			content: document.querySelector("#text-input").value,
-			image: imageCanvas,
-			topicId: topicId,
-			method: params,
-		}
-		var objJson = JSON.stringify(obj)
+		// var obj = {
+		// 	authorName: document.querySelector("#author").value,
+		// 	content: document.querySelector("#text-input").value,
+		// 	image: imageCanvas,
+		// 	topicId: topicId,
+		// 	method: params,
+		// 	formSendMail: {
+		// 		formTitle: document.querySelector("#title").value,
+		// 		formSendTo: document.querySelector("#send-to").value,
+		// 		formContent: document.querySelector("#content").value,
+		// 	}
+		// }
+
+		var formData = new FormData();
+		formData.append('authorName', document.querySelector("#author").value)
+		formData.append('content', document.querySelector("#text-input").value)
+		formData.append('image', imageCanvas)
+		formData.append('topicId', topicId)
+		formData.append('method', params)
+		formData.append('formTitle', document.querySelector("#title").value)
+		formData.append('formSendTo', document.querySelector("#send-to").value)
+		formData.append('formContent', document.querySelector("#content").value)
+		console.log(formData.get("authorName"));
+		// var objJson = JSON.stringify(obj)
 		// Show kết quả
-		console.log("-------");
-		console.log(obj);
-		console.log("-------");
-		console.log(objJson);
-		console.log("-------");
+		// console.log("-------");
+		// console.log(obj);
+		// console.log("-------");
+		// console.log(objJson);
+		// console.log("-------");
 		// End show kết quả
 		$.ajax({
 			url: '/chia-se',
 			method: "POST",
-			data: obj,
+			data: formData,
+			processData: false,
 			success: function (response) {
 				if (response.Code == 400) {
 					alert(response.Message)
