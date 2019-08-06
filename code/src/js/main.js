@@ -156,7 +156,7 @@ class Design {
 			this.setHeightImageItem();
 			this.changeImage();
 			this.changeText();
-			this.download();
+			// this.download();
 			this.changeStyle();
 			this.nextBlock();
 		}
@@ -230,22 +230,22 @@ class Design {
 			})
 		}
 	}
-	download() {
-		if (document.querySelector("#download") != null) {
-			document.querySelector("#download").addEventListener("click", function () {
-				document.querySelector("#download").scrollTo({
-					'behavior': 'smooth',
-					'left': 0,
-					'top': 0
-				});
-				html2canvas(document.querySelector("#result")).then(canvas => {
-					let imgBase64 = canvas.toDataURL("image/png")
-					document.querySelector("#download-hidden").setAttribute("href", imgBase64)
-					document.querySelector("#download-hidden").click()
-				});
-			});
-		}
-	}
+	// download() {
+	// 	if (document.querySelector("#download") != null) {
+	// 		document.querySelector("#download").addEventListener("click", function () {
+	// 			document.querySelector("#download").scrollTo({
+	// 				'behavior': 'smooth',
+	// 				'left': 0,
+	// 				'top': 0
+	// 			});
+	// 			html2canvas(document.querySelector("#result")).then(canvas => {
+	// 				let imgBase64 = canvas.toDataURL("image/png")
+	// 				document.querySelector("#download-hidden").setAttribute("href", imgBase64)
+	// 				document.querySelector("#download-hidden").click()
+	// 			});
+	// 		});
+	// 	}
+	// }
 	changeStyle() {
 		if (document.querySelectorAll("#style [data-style]").length > 0) {
 			let styleItems = document.querySelectorAll("#style [data-style]")
@@ -467,7 +467,14 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 function getInformation(params) {
 	var result = new Promise((resolve, reject) => {
 		html2canvas(document.getElementById("result")).then((canvas) => {
-			resolve(canvas.toDataURL("image/png"))
+			document.querySelector("#download").scrollTo({
+				'behavior': 'smooth',
+				'left': 0,
+				'top': 0
+			});
+
+			let imgBase64 = canvas.toDataURL("image/png")
+			resolve(imgBase64)
 		})
 	})
 	result.then(imageCanvas => {
@@ -486,21 +493,6 @@ function getInformation(params) {
 		var imageActiveDataSrc = document.querySelector("#image-nav .img-item.active img").getAttribute("data-src")
 		var imageActiveFilename = imageActiveDataSrc.split(/(\\|\/)/g).pop()
 
-		// var obj = {
-		// 	authorName: document.querySelector("#author").value,
-		// 	content: document.querySelector("#text-input").value,
-		// 	image: imageCanvas,
-		// 	topicId: topicId,
-		// 	method: params,
-		// 	formSendMail: {
-		// 		formTitle: document.querySelector("#title").value,
-		// 		formSendTo: document.querySelector("#send-to").value,
-		// 		formContent: document.querySelector("#content").value,
-		// 	}
-		// }
-
-
-
 		var formData = new FormData();
 		formData.append('authorName', document.querySelector("#author").value)
 		formData.append('content', document.querySelector("#text-input").value)
@@ -510,6 +502,10 @@ function getInformation(params) {
 		formData.append('formTitle', document.querySelector("#title").value)
 		formData.append('formSendTo', document.querySelector("#send-to").value)
 		formData.append('formContent', document.querySelector("#content").value)
+		if (params == "download") {
+			document.querySelector("#download-hidden").setAttribute("href", imageCanvas)
+			document.querySelector("#download-hidden").click()
+		}
 		$.ajax({
 			url: '/chia-se',
 			method: "POST",
