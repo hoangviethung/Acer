@@ -515,12 +515,10 @@ function getInformation(params) {
 					if (response.Code == 400) {
 						alert(response.Message)
 					} else {
-						console.log(response.Result);
 						if (params == "shareFacebook") {
-							var fullUrl = window.location.protocol + "//" + window.location.host + response.Result
-							console.log(fullUrl);
-							$("#facebook-share").append(`<div class="fb-share-button" data-href=${fullUrl} data-layout="button_count"></div>`)
-							$("body").find("#facebook-share .fb-share-button").trigger("click")
+							var fullUrl = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.protocol+"//" + window.location.host + response.Result
+							$("#facebook-share").append(`<a href=${fullUrl} target="_blank"></a>`)
+							window.open(fullUrl)
 						}
 						// window.location.assign(response.Result)
 					}
