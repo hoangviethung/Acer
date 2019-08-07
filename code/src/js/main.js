@@ -468,6 +468,10 @@ function getInformation(params) {
 	if (params == "sendMail") {
 		$("#send-friend-form").addClass("loading")
 		$("[data-method='sendMail']").attr("disabled", "disabled")
+	} else if (params == "download") {
+		$("html,body").animate({
+			scrollTop: 0
+		}, 0)
 	}
 	var result = new Promise((resolve, reject) => {
 		html2canvas(document.getElementById("result")).then((canvas) => {
