@@ -464,6 +464,11 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 }
 
 function getInformation(params) {
+
+	if (params == "sendMail") {
+		$("#send-friend-form").addClass("loading")
+		$("[data-method='sendMail']").attr("disabled", "disabled")
+	}
 	var result = new Promise((resolve, reject) => {
 		html2canvas(document.getElementById("result")).then((canvas) => {
 			document.querySelector("#download").scrollTo({
@@ -511,12 +516,12 @@ function getInformation(params) {
 				data: formData,
 				processData: false,
 				contentType: false,
-				beforeSend: function () {
-					if (params == "sendMail") {
-						$("#send-friend-form").addClass("loading")
-						$("[data-method='sendMail']").attr("disabled","disabled")
-					}
-				},
+				// beforeSend: function () {
+				// 	if (params == "sendMail") {
+				// 		$("#send-friend-form").addClass("loading")
+				// 		$("[data-method='sendMail']").attr("disabled","disabled")
+				// 	}
+				// },
 				success: function (response) {
 					if (response.Code == 400) {
 						alert(response.Message)
