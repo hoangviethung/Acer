@@ -3,6 +3,10 @@
 		width: 100%;
 	}
 
+	.intel-logo-bottom {
+		display: none;
+	}
+
 	position: relative;
 
 	.event-name {
@@ -551,6 +555,7 @@
 		padding-bottom: 80px;
 		height: 100%;
 		display: block;
+
 		@media (max-width: 1024.98px) {
 			// background-image: url("../img/m_game_3.jpg");
 			padding-top: 80px;
