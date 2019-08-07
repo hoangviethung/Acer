@@ -511,20 +511,29 @@ function getInformation(params) {
 				data: formData,
 				processData: false,
 				contentType: false,
+				beforeSend: function () {
+					if (params == "sendMail") {
+						$("#send-friend-form").addClass("loading")
+						$("[data-method='sendMail']").attr("disabled","disabled")
+					}
+				},
 				success: function (response) {
 					if (response.Code == 400) {
 						alert(response.Message)
 					} else {
-						if (params == "shareFacebook") {
+						if (params == "sendMail") {
+							window.location.assign(window.location.protocol + "//" + window.location.host + window.location.pathname)
+						} else if (params == "shareFacebook") {
 							var fullUrl = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.protocol + "//" + window.location.host + response.Result
 							$("#facebook-share").append(`<a href=${fullUrl} target="_blank"></a>`)
 							window.open(fullUrl)
 						}
-						// window.location.assign(response.Result)
 					}
 				},
 				error: function () {
 					alert("Có lỗi xảy ra!");
+					$("#send-friend-form").removeClass("loading")
+					$("[data-method='sendMail']").removeAttr("disabled")
 				}
 			})
 		}
