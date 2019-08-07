@@ -139,8 +139,8 @@ const checkBreakpoint = () => {
 const setHeightMobile = () => {
 	let ClassArray = document.querySelectorAll(".home");
 	Array.prototype.forEach.call(ClassArray, (el, i) => {
-		if (i >> 1) {
-			el.style.minHeight = window.innerHeight + "px"
+		if (i > 1) {
+			el.style.height = window.innerHeight + "px"
 		}
 	})
 }
@@ -573,6 +573,10 @@ $(document).ready(function () {
 		getInformation(method);
 	})
 
+
+	$(window).on("resize", function () {
+		setHeightMobile();
+	})
 	$(window).on("scroll", function () {
 		activeWhenScrollTo();
 	})

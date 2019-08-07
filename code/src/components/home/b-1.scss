@@ -542,19 +542,22 @@
 }
 
 .home-game {
-	padding-top: 40px;
-	background-image: url("../img/game_3.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	padding-bottom: 80px;
-
-	@media (max-width: 1024.98px) {
-		background-image: url("../img/m_game_3.jpg");
-		padding-top: 80px;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
+	a {
+		padding-top: 40px;
+		background-image: url("../img/game_3.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		padding-bottom: 80px;
+		height: 100%;
+		display: block;
+		@media (max-width: 1024.98px) {
+			// background-image: url("../img/m_game_3.jpg");
+			padding-top: 80px;
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+		}
 	}
 
 	img {
