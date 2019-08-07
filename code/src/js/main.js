@@ -481,8 +481,11 @@ function getInformation(params) {
 				'top': 0
 			});
 
-			let imgBase64 = canvas.toDataURL("image/png")
-			resolve(imgBase64)
+			setTimeout(() => {
+				let imgBase64 = canvas.toDataURL("image/png")
+				resolve(imgBase64)
+			}, 500);
+
 		})
 	})
 	result.then(imageCanvas => {
