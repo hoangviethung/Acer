@@ -463,6 +463,7 @@ function b64toBlob(b64Data, contentType, sliceSize) {
 	return blob;
 }
 
+
 function getInformation(params) {
 
 	if (params == "sendMail") {
